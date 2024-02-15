@@ -10,12 +10,15 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
+import os
 from pathlib import Path
 
 import cloudinary
 import cloudinary.api
 import cloudinary.uploader
+from dotenv import load_dotenv
 
+load_dotenv()
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -77,9 +80,9 @@ WSGI_APPLICATION = "task_management_system.wsgi.application"
 
 
 cloudinary.config(
-    cloud_name="dhdm5gjzp",
-    api_key="853387892876472",
-    api_secret="gvb3YPDhtVR0YAjS0dySWsyDnyg",
+    cloud_name=os.getenv("CLOUDINARY_CLOUD_NAME"),
+    api_key=os.getenv("CLOUDINARY_API_KEY"),
+    api_secret=os.getenv("CLOUDINARY_API_SECRET"),
 )
 
 # Use Cloudinary for media storage
@@ -91,11 +94,11 @@ DEFAULT_FILE_STORAGE = "storages.backends.s3boto3.S3Boto3Storage"
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
-        "NAME": "test_db",
-        "USER": "test_user",
-        "PASSWORD": "test_password",
-        "HOST": "127.0.0.1",
-        "PORT": "5432",
+        "NAME": os.getenv("POSTGRESQL_NAME"),
+        "USER": os.getenv("POSTGRESQL_USER"),
+        "PASSWORD": os.getenv("POSTGRESQL_PASSWORD"),
+        "HOST": os.getenv("POSTGRESQL_HOST"),
+        "PORT": os.getenv("POSTGRESQL_PORT"),
     }
 }
 
