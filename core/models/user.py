@@ -1,3 +1,4 @@
+import cloudinary.models
 from django.contrib.auth.models import (
     AbstractBaseUser,
     BaseUserManager,
@@ -33,6 +34,7 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     last_name = models.CharField(max_length=30)
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
+    image = cloudinary.models.CloudinaryField("image", blank=True, null=True)
 
     user_type = models.CharField(
         max_length=20, choices=StatusChoice, default=StatusChoice.OPTION3

@@ -85,8 +85,13 @@ cloudinary.config(
     api_secret=os.getenv("CLOUDINARY_API_SECRET"),
 )
 
-# Use Cloudinary for media storage
-DEFAULT_FILE_STORAGE = "storages.backends.s3boto3.S3Boto3Storage"
+CLOUDINARY = {
+    'transformation': {
+        'width': 300,
+        'height': 300,
+        'crop': 'fill',
+    }
+}
 
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
